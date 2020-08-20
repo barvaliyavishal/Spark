@@ -3,9 +3,7 @@ import org.apache.spark.SparkContext
 import org.apache.log4j._
 
 object WordCount  extends App{
-
   Logger.getLogger("org").setLevel(Level.ERROR)
-
   val sc = new SparkContext("local[*]","test")
   val book = sc.textFile("src/data/book.txt")
   val words = book.flatMap(x => x.split("\\W+"))
@@ -18,5 +16,4 @@ object WordCount  extends App{
   finalWords.foreach(println)
   println( "before filter " + sortedWords.count())
   println("after filter " + finalWords.count())
-
 }
