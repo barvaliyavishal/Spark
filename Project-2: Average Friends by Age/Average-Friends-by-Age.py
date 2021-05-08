@@ -11,9 +11,9 @@ def parseline(line):
     return (age,friends)
 
 lines = sc.textFile("/home/vishal/D/Udemy/frank kane/PySpark/2. Spark Basics and the RDD Interface/fakefriends.csv")
-AgeFriendsRDD = lines.mapValues(lambda x: (x,1))
-TotalsByAge = AgeFriendsRDD.reduceByKey(lambda x,y:(x[0]+y[0], x[1]+y[1]))
-AvgByAge = TotalsByAge.mapValues(lambda x,y : (x / y))
+rdd = lines.map(parseline)
+AgeFriendsRDD = rdd.mapValues(lambda x: (x,1)).reduceByKey(lambda x,y: (x[0]+x[1],y[0]+y[1]))
+AvgByAge = AgeFriendsRDD.mapValues(lambda x: x[0] / x[1])
 result = AvgByAge.collect()
 
 for i in result:
