@@ -6,7 +6,7 @@ sc = SparkContext(conf=conf)
 def parseline(line):
     fields = line.split(",")
     station = fields[0]
-    temp = int(fields[3])
+    temp = fields[3])
     type = fields[2]
     return (station,temp, type)
 
